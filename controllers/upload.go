@@ -10,12 +10,15 @@ type UploadController struct {
 }
 
 func (this *UploadController) Upload() {
-	_, _, err := this.GetFile("aaa")
+	_, h, err := this.GetFile("aaaa")
 	if err != nil {
 		beego.Error(err)
 	}
 
-	err = this.SaveToFile("aaa", "/home/fli/test")
+	filename := h.Filename
+	fmt.Println(filename)
+
+	err = this.SaveToFile("aaaa", "/home/fli/bbbbb")
 
 	if err != nil {
 		fmt.Println("Write file error: ", err)
@@ -24,4 +27,5 @@ func (this *UploadController) Upload() {
 	}
 
 	fmt.Println("Write file OK !!!")
+	this.Redirect("/", 302)
 }
