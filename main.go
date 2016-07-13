@@ -7,8 +7,8 @@ import (
 
 func init() {
 	beego.BConfig.Listen.EnableHTTPS = true
-	beego.BConfig.Listen.HTTPSCertFile = "/home/fli/CA/newreq.ca"
-	beego.BConfig.Listen.HTTPSKeyFile = "/home/fli/CA/newreq.key"
+	beego.BConfig.Listen.HTTPSCertFile = "conf/newreq.ca"
+	beego.BConfig.Listen.HTTPSKeyFile = "conf/newreq.key"
 	beego.BConfig.Listen.HTTPSPort = 2443
 }
 
