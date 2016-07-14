@@ -11,19 +11,21 @@ type UploadController struct {
 }
 
 func (this *UploadController) Upload() {
+	if_switch := beego.AppConfig.String("switch")
+	if if_switch == "on" {
+		cfg_uname := beego.AppConfig.String("username")
+		cfg_pwd := beego.AppConfig.String("password")
 
-	cfg_uname := beego.AppConfig.String("username")
-	cfg_pwd := beego.AppConfig.String("password")
+		r := this.Ctx.Request
+		uname, pwd, ok := r.BasicAuth()
 
-	r := this.Ctx.Request
-	uname, pwd, ok := r.BasicAuth()
-
-	if cfg_uname == uname && cfg_pwd == pwd {
-		fmt.Println("-----", uname, pwd, ok, "-----")
-	} else {
-		fmt.Println("uname or pwd error")
-		this.Redirect("/", 302)
-		return
+		if cfg_uname == uname && cfg_pwd == pwd {
+			fmt.Println("-----", uname, pwd, ok, "-----")
+		} else {
+			fmt.Println("uname or pwd error")
+			this.Redirect("/", 302)
+			return
+		}
 	}
 
 	_, h, err := this.GetFile("aaaa")
